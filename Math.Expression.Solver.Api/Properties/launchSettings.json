@@ -1,0 +1,13 @@
+﻿{
+  "profiles": {
+    "Math.Expression.Solver.Api": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:5123;https://localhost:7123",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

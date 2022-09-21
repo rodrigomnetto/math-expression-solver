@@ -1,0 +1,20 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Math.Expression.Solver.Api";
+
+package expression;
+
+service Expression {
+
+  rpc Solve (SolveRequest) returns (SolveReply);
+}
+
+message SolveRequest {
+  string expression = 1;
+}
+
+message SolveReply {
+  double result = 1;
+  bool succeeded = 2;
+  string message = 3;
+}

@@ -1,0 +1,12 @@
+C:\Users\rodri\source\repos\Math.Expression.Solver\Math.Expression.Solver.Application\bin\Debug\net6.0\Math.Expression.Solver.Application.deps.json
+C:\Users\rodri\source\repos\Math.Expression.Solver\Math.Expression.Solver.Application\bin\Debug\net6.0\Math.Expression.Solver.Application.dll
+C:\Users\rodri\source\repos\Math.Expression.Solver\Math.Expression.Solver.Application\bin\Debug\net6.0\Math.Expression.Solver.Application.pdb
+C:\Users\rodri\source\repos\Math.Expression.Solver\Math.Expression.Solver.Application\obj\Debug\net6.0\Math.Expression.Solver.Application.csproj.AssemblyReference.cache
+C:\Users\rodri\source\repos\Math.Expression.Solver\Math.Expression.Solver.Application\obj\Debug\net6.0\Math.Expression.Solver.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rodri\source\repos\Math.Expression.Solver\Math.Expression.Solver.Application\obj\Debug\net6.0\Math.Expression.Solver.Application.AssemblyInfoInputs.cache
+C:\Users\rodri\source\repos\Math.Expression.Solver\Math.Expression.Solver.Application\obj\Debug\net6.0\Math.Expression.Solver.Application.AssemblyInfo.cs
+C:\Users\rodri\source\repos\Math.Expression.Solver\Math.Expression.Solver.Application\obj\Debug\net6.0\Math.Expression.Solver.Application.csproj.CoreCompileInputs.cache
+C:\Users\rodri\source\repos\Math.Expression.Solver\Math.Expression.Solver.Application\obj\Debug\net6.0\Math.Expression.Solver.Application.dll
+C:\Users\rodri\source\repos\Math.Expression.Solver\Math.Expression.Solver.Application\obj\Debug\net6.0\refint\Math.Expression.Solver.Application.dll
+C:\Users\rodri\source\repos\Math.Expression.Solver\Math.Expression.Solver.Application\obj\Debug\net6.0\Math.Expression.Solver.Application.pdb
+C:\Users\rodri\source\repos\Math.Expression.Solver\Math.Expression.Solver.Application\obj\Debug\net6.0\ref\Math.Expression.Solver.Application.dll

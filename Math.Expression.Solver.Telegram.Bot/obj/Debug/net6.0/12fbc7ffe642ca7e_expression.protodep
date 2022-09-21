@@ -1,0 +1,2 @@
+obj\Debug\net6.0\Protos/Expression.cs \
+obj\Debug\net6.0\Protos/ExpressionGrpc.cs: Protos/expression.proto
