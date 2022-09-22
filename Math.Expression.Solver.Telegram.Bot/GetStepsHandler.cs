@@ -19,7 +19,8 @@ namespace Math.Expression.Solver.Telegram.Bot
             var expression = message.Text.Split(" ")[1];
             var getStepsRequest = new GetStepsRequest()
             {
-                Expression = expression
+                Expression = expression,
+                UserId = _botParameters.Message.From.Id.ToString()
             };
 
             var response = await client.GetStepsAsync(getStepsRequest, cancellationToken: cancellationToken);

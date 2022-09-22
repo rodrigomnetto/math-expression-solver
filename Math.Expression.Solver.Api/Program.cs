@@ -1,7 +1,11 @@
 using Math.Expression.Solver.Api.Services;
 using Math.Expression.Solver.Application.Commands;
+using Math.Expression.Solver.Application.Database;
+using Math.Expression.Solver.Application.Querys;
+using Math.Expression.Solver.Application.Repositories;
 using static Math.Expression.Solver.Application.Commands.SolveCommand;
 using static Math.Expression.Solver.Application.Commands.StepsCommand;
+using static Math.Expression.Solver.Application.Querys.GetUserExpressionsQuery;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +16,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddGrpc();
 builder.Services.AddScoped<ISolveCommandHandler, SolveCommandHandler>();
 builder.Services.AddScoped<IStepsCommandHandler, StepsCommandHandler>();
+builder.Services.AddScoped<IUserExpressionsRepository, UserExpressionsRepository>();
+builder.Services.AddScoped<DbSession>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IUserExpressionsRepository, UserExpressionsRepository>();
+builder.Services.AddScoped<IGetUserExpressionsQueryHandler, GetUserExpressionsQueryHandler>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

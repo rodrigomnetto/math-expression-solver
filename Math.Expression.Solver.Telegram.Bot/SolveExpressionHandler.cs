@@ -20,7 +20,8 @@ namespace Math.Expression.Solver.Telegram.Bot
             var expression = message.Text.Split(" ")[1];
             var solveRequest = new SolveRequest()
             {
-                Expression = expression
+                Expression = expression,
+                UserId = _botParameters.Message.From.Id.ToString()
             };
 
             var response = await client.SolveAsync(solveRequest, cancellationToken: cancellationToken);

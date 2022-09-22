@@ -9,14 +9,22 @@ service Expression {
   rpc Solve (SolveRequest) returns (SolveReply);
 
   rpc GetSteps (GetStepsRequest) returns (GetStepsReply);
+
+  rpc GetUserExpressions (GetUserExpressionsRequest) returns (GetUserExpressionsReply);
 }
 
 message SolveRequest {
   string expression = 1;
+  string userId = 2;
 }
 
 message GetStepsRequest {
   string expression = 1;
+  string userId = 2;
+}
+
+message GetUserExpressionsRequest {
+  string userId = 1;
 }
 
 message SolveReply {
@@ -30,4 +38,8 @@ message GetStepsReply {
   bool succeeded = 2;
   string message = 3;
   double result = 4;
+}
+
+message GetUserExpressionsReply {
+  repeated string expressions = 1;
 }

@@ -32,6 +32,7 @@ namespace Math.Expression.Solver.Telegram.Bot
             {
                 "/solve" => Execute(botParameters, new SolveExpressionHandler(botParameters)),
                 "/steps" => Execute(botParameters, new GetStepsHandler(botParameters)),
+                "/memo" => GetUserExpressions(botParameters),
                 _ => Usage(botClient, message, cancellationToken)
             };
 
@@ -61,6 +62,44 @@ namespace Math.Expression.Solver.Telegram.Bot
             {
                 _logger.LogError(e, message.Text);
                 return await errorHandler.Handle("Sorry, we can't solve this...");
+            }
+        }
+
+        private async Task<Message> GetUserExpressions(BotParameters botParameters)
+        {
+            var (botClient, message, cancellationToken) = botParameters;
+            var errorHandler = new ErrorMessageHandler(botParameters);
+
+            await botClient.SendChatActionAsync(
+                chatId: message.Chat.Id,
+                chatAction: ChatAction.Typing,
+                cancellationToken: cancellationToken);
+
+            var client = _grpcClientFactory.CreateClient<Expression.ExpressionClient>("Expression");
+            var getUserExpressionsRequest = new GetUserExpressionsRequest()
+            {
+                UserId = botParameters.Message.From.Id.ToString()
+            };
+
+            try
+            {
+                var response = await client.GetUserExpressionsAsync(getUserExpressionsRequest);
+
+                var chatResponse = "Found 0 expressions";
+
+                if (response.Expressions?.Any() is true)
+                    chatResponse = string.Join('\n', response.Expressions);
+
+                return await botClient.SendTextMessageAsync(
+                    chatId: message.Chat.Id,
+                    text: chatResponse,
+                    replyMarkup: new ReplyKeyboardRemove(),
+                    cancellationToken: cancellationToken);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Query user id: {getUserExpressionsRequest.UserId}");
+                return await errorHandler.Handle("Sorry, an error has occured...");
             }
         }
 

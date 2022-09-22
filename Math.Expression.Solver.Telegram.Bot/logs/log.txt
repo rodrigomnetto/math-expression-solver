@@ -1,4 +1,0 @@
-2022-09-22 01:09:25.478 -03:00 [ERR] /steps -1+2
-Grpc.Core.RpcException: Status(StatusCode="Unimplemented", Detail="")
-   at Math.Expression.Solver.Telegram.Bot.GetStepsHandler.Handle(ExpressionClient client, ErrorMessageHandler errorHandler) in C:\Users\rodri\source\repos\Math.Expression.Solver\Math.Expression.Solver.Telegram.Bot\GetStepsHandler.cs:line 25
-   at Math.Expression.Solver.Telegram.Bot.MessageHandler.Execute(BotParameters botParameters, IExpressionHandler handler) in C:\Users\rodri\source\repos\Math.Expression.Solver\Math.Expression.Solver.Telegram.Bot\MessageHandler.cs:line 54
