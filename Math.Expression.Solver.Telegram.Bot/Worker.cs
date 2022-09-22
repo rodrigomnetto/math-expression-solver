@@ -7,12 +7,12 @@ namespace Math.Expression.Solver.Telegram.Bot
 {
     public class Worker : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
+        private readonly ILogger<MessageHandler> _logger;
         private readonly GrpcClientFactory _grpcClientFactory;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _configuration;
 
-        public Worker(ILogger<Worker> logger, GrpcClientFactory grpcClientFactory, IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        public Worker(ILogger<MessageHandler> logger, GrpcClientFactory grpcClientFactory, IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _logger = logger;
             _grpcClientFactory = grpcClientFactory;
@@ -34,7 +34,7 @@ namespace Math.Expression.Solver.Telegram.Bot
             {
                 var httpClient = _httpClientFactory.CreateClient();
                 var telegramClient = new TelegramBotClient(token, httpClient);
-                var handler = new MessageHandler(_grpcClientFactory);
+                var handler = new MessageHandler(_grpcClientFactory, _logger);
                 await telegramClient.ReceiveAsync(handler, receiverOptions, stoppingToken);
 
                 await Task.Delay(1000, stoppingToken);

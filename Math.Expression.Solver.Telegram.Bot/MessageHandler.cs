@@ -26,63 +26,42 @@ namespace Math.Expression.Solver.Telegram.Bot
             if (message?.Text is not { } messageText)
                 return;
 
+            var botParameters = new BotParameters(botClient, message, cancellationToken);
+
             var action = messageText.Split(' ')[0] switch
             {
-                "/solve" => SolveExpression(botClient, message, cancellationToken),
+                "/solve" => Execute(botParameters, new SolveExpressionHandler(botParameters)),
+                "/steps" => Execute(botParameters, new GetStepsHandler(botParameters)),
                 _ => Usage(botClient, message, cancellationToken)
             };
 
             await action;
         }
 
-        private async Task<Message> SolveExpression(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
+        private async Task<Message> Execute(BotParameters botParameters, IExpressionHandler handler)
         {
+            var (botClient, message, cancellationToken) = botParameters;
+            var errorHandler = new ErrorMessageHandler(botParameters);
+
             await botClient.SendChatActionAsync(
                 chatId: message.Chat.Id,
                 chatAction: ChatAction.Typing,
                 cancellationToken: cancellationToken);
 
-            string expression = string.Empty;
-
             try
             {
                 var client = _grpcClientFactory.CreateClient<Expression.ExpressionClient>("Expression");
-                expression = message.Text.Split(" ")[1];
-
-                var solveRequest = new SolveRequest()
-                {
-                    Expression = expression
-                };
-
-                var response = await client.SolveAsync(solveRequest, cancellationToken: cancellationToken);
-
-                if (response.Succeeded is false)
-                    return await SendErrorMessage(botClient, message, response.Message, cancellationToken);
-
-                return await botClient.SendTextMessageAsync(
-                    chatId: message.Chat.Id,
-                    text: response.Result.ToString(),
-                    replyMarkup: new ReplyKeyboardRemove(),
-                    cancellationToken: cancellationToken);
+                return await handler.Handle(client, errorHandler);
             }
             catch (IndexOutOfRangeException)
             {
-                return await SendErrorMessage(botClient, message, "Incorrect syntax. Try: /solve (2+2)", cancellationToken);
+                return await errorHandler.Handle("Incorrect syntax. Try: /solve (2+2)");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, expression);
-                return await SendErrorMessage(botClient, message, "Sorry, we can't solve this...", cancellationToken);
+                _logger.LogError(e, message.Text);
+                return await errorHandler.Handle("Sorry, we can't solve this...");
             }
-        }
-
-        private static Task<Message> SendErrorMessage(ITelegramBotClient botClient, Message message, string error, CancellationToken cancellationToken)
-        {
-            return botClient.SendTextMessageAsync(
-                chatId: message.Chat.Id,
-                text: error,
-                replyMarkup: new ReplyKeyboardRemove(),
-                cancellationToken: cancellationToken);
         }
 
         static async Task<Message> Usage(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)

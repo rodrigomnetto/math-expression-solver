@@ -49,6 +49,10 @@ namespace Math.Expression.Solver.Api {
     static readonly grpc::Marshaller<global::Math.Expression.Solver.Api.SolveRequest> __Marshaller_expression_SolveRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Math.Expression.Solver.Api.SolveRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Math.Expression.Solver.Api.SolveReply> __Marshaller_expression_SolveReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Math.Expression.Solver.Api.SolveReply.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Math.Expression.Solver.Api.GetStepsRequest> __Marshaller_expression_GetStepsRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Math.Expression.Solver.Api.GetStepsRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Math.Expression.Solver.Api.GetStepsReply> __Marshaller_expression_GetStepsReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Math.Expression.Solver.Api.GetStepsReply.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Math.Expression.Solver.Api.SolveRequest, global::Math.Expression.Solver.Api.SolveReply> __Method_Solve = new grpc::Method<global::Math.Expression.Solver.Api.SolveRequest, global::Math.Expression.Solver.Api.SolveReply>(
@@ -57,6 +61,14 @@ namespace Math.Expression.Solver.Api {
         "Solve",
         __Marshaller_expression_SolveRequest,
         __Marshaller_expression_SolveReply);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Math.Expression.Solver.Api.GetStepsRequest, global::Math.Expression.Solver.Api.GetStepsReply> __Method_GetSteps = new grpc::Method<global::Math.Expression.Solver.Api.GetStepsRequest, global::Math.Expression.Solver.Api.GetStepsReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetSteps",
+        __Marshaller_expression_GetStepsRequest,
+        __Marshaller_expression_GetStepsReply);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -74,6 +86,12 @@ namespace Math.Expression.Solver.Api {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Math.Expression.Solver.Api.GetStepsReply> GetSteps(global::Math.Expression.Solver.Api.GetStepsRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
     }
 
     /// <summary>Creates service definition that can be registered with a server</summary>
@@ -82,7 +100,8 @@ namespace Math.Expression.Solver.Api {
     public static grpc::ServerServiceDefinition BindService(ExpressionBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_Solve, serviceImpl.Solve).Build();
+          .AddMethod(__Method_Solve, serviceImpl.Solve)
+          .AddMethod(__Method_GetSteps, serviceImpl.GetSteps).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -93,6 +112,7 @@ namespace Math.Expression.Solver.Api {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, ExpressionBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_Solve, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Math.Expression.Solver.Api.SolveRequest, global::Math.Expression.Solver.Api.SolveReply>(serviceImpl.Solve));
+      serviceBinder.AddMethod(__Method_GetSteps, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Math.Expression.Solver.Api.GetStepsRequest, global::Math.Expression.Solver.Api.GetStepsReply>(serviceImpl.GetSteps));
     }
 
   }

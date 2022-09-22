@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
+    <None Remove="Commands\StepsCommand.cs~RF2b94df2.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Querys\" />
   </ItemGroup>
 

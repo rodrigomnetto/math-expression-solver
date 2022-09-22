@@ -3,9 +3,25 @@ namespace Math.Expression.Solver.Application.Parser
 {
     public class ExpressionParser
     {
+        private Func<char, double, double, double> _executeOperation;
+
+        public ExpressionParser(StepsWriter? stepsWriter = null)
+        {
+            _executeOperation = ExecuteOperation;
+
+            if (stepsWriter is not null)
+            {
+                _executeOperation = (symbol, a, b) =>
+                {
+                    stepsWriter.Write($"{a}{symbol}{b}");
+                    return ExecuteOperation(symbol, a, b);
+                };
+            }
+        }
+
         private static readonly char[] _operations = new[] { '+', '-', '*', '/', '^' };
 
-        public static double Parse(string expression)
+        public double Parse(string expression)
         {
             if (expression.Contains('('))
                 return ParseParentheses(expression);
@@ -13,7 +29,7 @@ namespace Math.Expression.Solver.Application.Parser
                 return ParseOperation(expression);
         }
 
-        private static double ParseParentheses(string expression)
+        private double ParseParentheses(string expression)
         {
             var lastBeginParentheses = expression.LastIndexOf('(');
 
@@ -31,26 +47,35 @@ namespace Math.Expression.Solver.Application.Parser
             return ParseParentheses(expression);
         }
 
-        private static double ParseOperation(string expression)
+        private double ParseOperation(string expression)
         {
             foreach (var operation in _operations)
             {
-                var splitedExpression = expression.Split(operation);
+                var OperationIndex = expression.LastIndexOf(operation);
+                if (OperationIndex is -1) continue;
+
+                var firstHalf = expression[..OperationIndex];
+                var secondHalf = expression[(OperationIndex + 1)..];
                 var skipMinus = false;
-                if (operation == '-' && splitedExpression[0].Any() && splitedExpression[0].Last() < 48)
-                    skipMinus = true;
 
-                if (splitedExpression.Length > 1 && skipMinus is false)
+                if (operation == '-') //minus sign special cases
                 {
-                    var firstHalf = splitedExpression[0];
-                    var secondHalf = splitedExpression.TakeLast(splitedExpression.Length - 1);
+                    if (string.IsNullOrEmpty(firstHalf)) //ex:-4*2
+                        skipMinus = true;
+                    else if (firstHalf.Last() == operation) //ex:3--4
+                    {
+                        firstHalf = firstHalf.Remove(firstHalf.LastIndexOf(operation));
+                        secondHalf = $"-{secondHalf}";
+                    }
+                    else if (firstHalf.Any() && firstHalf.Last() < 48) //ex:3*-4
+                        skipMinus = true;
+                }
 
-                    if (firstHalf == string.Empty)
-                        firstHalf = "0";
-
+                if (skipMinus is false)
+                {
                     var a = ParseOperation(firstHalf);
-                    var b = ParseOperation(string.Join(operation, secondHalf));
-                    return ExecuteOperation(operation, a, b);
+                    var b = ParseOperation(secondHalf);
+                    return _executeOperation(operation, a, b);
                 }
             }
             return Convert.ToDouble(expression);
@@ -66,6 +91,5 @@ namespace Math.Expression.Solver.Application.Parser
             '^' => System.Math.Pow(a, b),
             _ => 0,
         };
-
     }
 }

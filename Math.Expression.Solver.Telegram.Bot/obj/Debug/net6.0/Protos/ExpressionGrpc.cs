@@ -49,6 +49,10 @@ namespace Math.Expression.Solver.Telegram.Bot {
     static readonly grpc::Marshaller<global::Math.Expression.Solver.Telegram.Bot.SolveRequest> __Marshaller_expression_SolveRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Math.Expression.Solver.Telegram.Bot.SolveRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Math.Expression.Solver.Telegram.Bot.SolveReply> __Marshaller_expression_SolveReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Math.Expression.Solver.Telegram.Bot.SolveReply.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Math.Expression.Solver.Telegram.Bot.GetStepsRequest> __Marshaller_expression_GetStepsRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Math.Expression.Solver.Telegram.Bot.GetStepsRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Math.Expression.Solver.Telegram.Bot.GetStepsReply> __Marshaller_expression_GetStepsReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Math.Expression.Solver.Telegram.Bot.GetStepsReply.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Math.Expression.Solver.Telegram.Bot.SolveRequest, global::Math.Expression.Solver.Telegram.Bot.SolveReply> __Method_Solve = new grpc::Method<global::Math.Expression.Solver.Telegram.Bot.SolveRequest, global::Math.Expression.Solver.Telegram.Bot.SolveReply>(
@@ -57,6 +61,14 @@ namespace Math.Expression.Solver.Telegram.Bot {
         "Solve",
         __Marshaller_expression_SolveRequest,
         __Marshaller_expression_SolveReply);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Math.Expression.Solver.Telegram.Bot.GetStepsRequest, global::Math.Expression.Solver.Telegram.Bot.GetStepsReply> __Method_GetSteps = new grpc::Method<global::Math.Expression.Solver.Telegram.Bot.GetStepsRequest, global::Math.Expression.Solver.Telegram.Bot.GetStepsReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetSteps",
+        __Marshaller_expression_GetStepsRequest,
+        __Marshaller_expression_GetStepsReply);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -110,6 +122,26 @@ namespace Math.Expression.Solver.Telegram.Bot {
       public virtual grpc::AsyncUnaryCall<global::Math.Expression.Solver.Telegram.Bot.SolveReply> SolveAsync(global::Math.Expression.Solver.Telegram.Bot.SolveRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Solve, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Math.Expression.Solver.Telegram.Bot.GetStepsReply GetSteps(global::Math.Expression.Solver.Telegram.Bot.GetStepsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetSteps(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Math.Expression.Solver.Telegram.Bot.GetStepsReply GetSteps(global::Math.Expression.Solver.Telegram.Bot.GetStepsRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetSteps, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Math.Expression.Solver.Telegram.Bot.GetStepsReply> GetStepsAsync(global::Math.Expression.Solver.Telegram.Bot.GetStepsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetStepsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Math.Expression.Solver.Telegram.Bot.GetStepsReply> GetStepsAsync(global::Math.Expression.Solver.Telegram.Bot.GetStepsRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetSteps, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]

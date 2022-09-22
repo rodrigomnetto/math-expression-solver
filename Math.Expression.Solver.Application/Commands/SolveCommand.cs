@@ -27,7 +27,8 @@ namespace Math.Expression.Solver.Application.Commands
 
                 try
                 {
-                    result = ExpressionParser.Parse(command.Expression);
+                    var parser = new ExpressionParser();
+                    result = parser.Parse(command.Expression);
                 }
                 catch
                 {
